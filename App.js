@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, TextInput, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, Image, ScrollView, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { MaterialIcons } from '@expo/vector-icons';
 
@@ -27,65 +27,77 @@ export default function App() {
     <View style={styles.container}>
       <StatusBar style="auto" />
 
-      {/* Header Section */}
-      <View style={styles.headerContainer}>
-        <MaterialIcons name="location-on" size={24} color="red" />
-        <View style={styles.locationTextContainer}>
-          <Text style={styles.locationText}>A Block</Text>
-          <Text style={styles.subLocationText}>Sector 63, Noida</Text>
-        </View>
-        <TouchableOpacity style={styles.profileIcon}>
-          <MaterialIcons name="person" size={30} color="gray" />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.searchContainer}>
-        <TextInput
-          style={styles.searchInput}
-          placeholder='Search "thali"'
-        />
-        <TouchableOpacity style={styles.searchIcon}>
-          <MaterialIcons name="search" size={24} color="red" />
-        </TouchableOpacity>
-      </View>
-
-      {/* Gold Promotion Section */}
-      <View style={styles.promoContainer}>
-        <Text style={styles.promoTitle}>GOLD</Text>
-        <Text style={styles.promoText}>Unlimited free deliveries & more at</Text>
-        <Text style={styles.promoPrice}>₹30 for 3 months</Text>
-        <TouchableOpacity style={styles.promoButton}>
-          <Text style={styles.promoButtonText}>Join Gold now →</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Tabs Section */}
-      <View style={styles.tabsContainer}>
-        <TouchableOpacity>
-          <Text style={styles.activeTab}>Recommended</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.inactiveTab}>Favourites</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Restaurant List Section */}
-      <ScrollView style={styles.restaurantListContainer}>
-        {restaurants.map((restaurant) => (
-          <View key={restaurant.id} style={styles.restaurantContainer}>
-            <View style={styles.restaurantCard}>
-              <Image source={{ uri: restaurant.img }} style={styles.restaurantImage} />
-              <Text style={styles.restaurantName}>{restaurant.name}</Text>
-              <Text style={styles.restaurantDiscount}>{restaurant.discount}</Text>
-              <Text style={styles.restaurantTime}>{restaurant.deliveryTime}</Text>
-              {restaurant.label && (
-                <TouchableOpacity>
-                  <Text style={styles.restaurantLabel}>{restaurant.label}</Text>
-                </TouchableOpacity>
-              )}
+      {/* Background Image */}
+      <ImageBackground 
+        source={require('./assets/tst.png')} 
+        style={styles.backgroundImage} 
+        imageStyle={{ transform: [{ rotate: '180deg' }] }}
+      >
+        {/* Content over the background image */}
+        <View style={styles.overlay}>
+          {/* Header Section */}
+          <View style={styles.headerContainer}>
+            <MaterialIcons name="location-on" size={24} color="red" />
+            <View style={styles.locationTextContainer}>
+              <Text style={styles.locationText}>A Block</Text>
+              <Text style={styles.subLocationText}>Sector 63, Noida</Text>
             </View>
+            <TouchableOpacity style={styles.profileIcon}>
+              <MaterialIcons name="person" size={30} color="gray" />
+            </TouchableOpacity>
           </View>
-        ))}
-      </ScrollView>
+
+          {/* Sticky Search Bar */}
+          <View style={styles.searchContainer}>
+            <TextInput
+              style={styles.searchInput}
+              placeholder='Search "thali"'
+            />
+            <TouchableOpacity style={styles.searchIcon}>
+              <MaterialIcons name="search" size={24} color="red" />
+            </TouchableOpacity>
+          </View>
+
+          {/* Gold Promotion Section */}
+          <View style={styles.promoContainer}>
+            <Text style={styles.promoTitle}>GOLD</Text>
+            <Text style={styles.promoText}>Unlimited free deliveries & more at</Text>
+            <Text style={styles.promoPrice}>₹30 for 3 months</Text>
+            <TouchableOpacity style={styles.promoButton}>
+              <Text style={styles.promoButtonText}>Join Gold now →</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Tabs Section */}
+          <View style={styles.tabsContainer}>
+            <TouchableOpacity>
+              <Text style={styles.activeTab}>Recommended</Text>
+            </TouchableOpacity>
+            <TouchableOpacity>
+              <Text style={styles.inactiveTab}>Favourites</Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Restaurant List Section */}
+          <ScrollView style={styles.restaurantListContainer}>
+            {restaurants.map((restaurant) => (
+              <View key={restaurant.id} style={styles.restaurantContainer}>
+                <View style={styles.restaurantCard}>
+                  <Image source={{ uri: restaurant.img }} style={styles.restaurantImage} />
+                  <Text style={styles.restaurantName}>{restaurant.name}</Text>
+                  <Text style={styles.restaurantDiscount}>{restaurant.discount}</Text>
+                  <Text style={styles.restaurantTime}>{restaurant.deliveryTime}</Text>
+                  {restaurant.label && (
+                    <TouchableOpacity>
+                      <Text style={styles.restaurantLabel}>{restaurant.label}</Text>
+                    </TouchableOpacity>
+                  )}
+                </View>
+              </View>
+            ))}
+          </ScrollView>
+        </View>
+      </ImageBackground>
 
       {/* Bottom Navigation */}
       <View style={styles.bottomNavContainer}>
@@ -110,6 +122,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
+  },
+  backgroundImage: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    opacity: 1, // Adjust opacity here
+  },
+  overlay: {
+    flex: 1,
   },
   headerContainer: {
     flexDirection: 'row',
@@ -136,6 +157,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginHorizontal: 16,
     marginTop: 8,
+    backgroundColor: 'white',
+    borderRadius: 25,
+    position: 'sticky',
+    top: 0,
+    zIndex: 1,
   },
   searchInput: {
     flex: 1,
