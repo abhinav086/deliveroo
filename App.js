@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Image, ScrollView, TouchableOpacity, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 
 export default function App() {
   const restaurants = [
@@ -29,13 +29,13 @@ export default function App() {
 
       {/* Header Section */}
       <View style={styles.headerContainer}>
-        <Ionicons name="location-outline" size={24} color="red" />
+        <MaterialIcons name="location-on" size={24} color="red" />
         <View style={styles.locationTextContainer}>
           <Text style={styles.locationText}>A Block</Text>
           <Text style={styles.subLocationText}>Sector 63, Noida</Text>
         </View>
         <TouchableOpacity style={styles.profileIcon}>
-          <Ionicons name="md-person-circle-outline" size={30} color="gray" />
+          <MaterialIcons name="person" size={30} color="gray" />
         </TouchableOpacity>
       </View>
       <View style={styles.searchContainer}>
@@ -44,7 +44,7 @@ export default function App() {
           placeholder='Search "thali"'
         />
         <TouchableOpacity style={styles.searchIcon}>
-          <Ionicons name="search" size={24} color="red" />
+          <MaterialIcons name="search" size={24} color="red" />
         </TouchableOpacity>
       </View>
 
@@ -90,15 +90,15 @@ export default function App() {
       {/* Bottom Navigation */}
       <View style={styles.bottomNavContainer}>
         <TouchableOpacity>
-          <Ionicons name="delivery-dining" size={24} color="red" />
+          <MaterialIcons name="delivery-dining" size={24} color="red" />
           <Text style={styles.bottomNavTextActive}>Delivery</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Ionicons name="restaurant-menu" size={24} color="gray" />
+          <MaterialIcons name="restaurant-menu" size={24} color="gray" />
           <Text style={styles.bottomNavTextInactive}>Dining</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Ionicons name="broadcast-tower" size={24} color="gray" />
+          <MaterialIcons name="live-tv" size={24} color="gray" />
           <Text style={styles.bottomNavTextInactive}>Live</Text>
         </TouchableOpacity>
       </View>
@@ -115,6 +115,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
+    marginTop: 26,
   },
   locationTextContainer: {
     marginLeft: 8,
